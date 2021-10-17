@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+sway_status() {
+    SEP=" | "
+
+    # Date
+    date=$(date +'%A %d-%m-%Y %H:%M')
+
+    # PulseAudio master volume
+    volume=$(pamixer --get-volume)
+    is_muted=$(pamixer --get-mute)
+
+    if [ $is_muted -eq "true" ]; then
+        volume_icon="{x"
+    elif [ $volume -gt 50 ]; then
+        volume_icon="{+"
+    else volume_icon="{ "; fi
+
+    # Network
+    network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+')
+    ping=$(ping -c 1 google.com | tail -1 | awk '{printf("%2d",$4)}' | cut -f 2 -d "/" | cut -f 1 -d ".")
+
+    if [ $network ]; then network_icon="⇆"; else network_icon="x" ping=0; fi
+
+    # CPU Temp
+    cpu=$(
+        echo "CPU "
+        sensors | grep "Package" | cut -f 5 -d " "
+    )
+
+    # Brightness
+    brightness_path="/sys/class/backlight/intel_backlight"
+    max_brightness=$(cat $brightness_path/max_brightness)
+    brightness=$(cat $brightness_path/brightness)
+    brightness_percent=$(($brightness * 100 / $max_brightness))
+    brightness_icon="B"
+
+    # Battery
+    battery_status=$(cat /sys/class/power_supply/CMB0/status)
+    battery=$(
+        cat /sys/class/power_supply/CMB0/capacity
+        echo "%"
+    )
+
+    if [ $battery_status = "Discharging" ]; then battery_icon="⚠"; else battery_icon="⚡"; fi
+
+    # Status bar
+    echo $date $SEP $volume% $volume_icon $SEP $network_icon $network "("$ping" ms)" $SEP $cpu $SEP $brightness_percent% $brightness_icon $SEP $battery_icon $battery
+}
+
+sway_status
