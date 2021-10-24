@@ -10,9 +10,9 @@ sway_status() {
     volume=$(pamixer --get-volume)
     is_muted=$(pamixer --get-mute)
 
-    if [ $is_muted -eq "true" ]; then
+    if [ $is_muted = "true" ]; then
         volume_icon="{x"
-    elif [ $volume -gt 50 ]; then
+    elif [[ $volume -gt 50 ]]; then
         volume_icon="{+"
     else volume_icon="{ "; fi
 
