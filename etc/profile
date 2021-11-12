@@ -50,4 +50,7 @@ unset TERMCAP
 unset MANPATH
 
 export FONTCONFIG_PATH=/etc/fonts
+
 export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
