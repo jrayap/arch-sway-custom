@@ -68,6 +68,9 @@ input type:touchpad {
 }
 
 ### Key bindings
+    # Lock desktop wen lid closes/opens (I don't know)
+    bindswitch lid:on exec $lock
+
 #
 # Basics:
 #
