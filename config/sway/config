@@ -243,6 +243,7 @@ bar {
     position top
 
     font monospace normal 12
+    # icon_theme adwita
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
