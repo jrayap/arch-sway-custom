@@ -67,6 +67,12 @@ input type:touchpad {
 	tap enabled
 }
 
+# Trackpad gesture events
+# GESTURE_SWYPE_BEGIN
+# GESTURE_SWIPE_UPDATE +21.018s [number of fingers] 4 [coordinates value +/-] 11.87/-2.64 (11.86/-2.64 unaccelerated)
+# GESTURE_SWIPE_UPDATE +21.026s [number of fingers] 4 [coordinates value +/-] 13.21/-2.91 (12.96/-2.86 unaccelerated)
+# GESTURE_SWYPE_END
+
 ### Key bindings
     # Lock desktop wen lid closes/opens (I don't know)
     bindswitch lid:on exec $lock
